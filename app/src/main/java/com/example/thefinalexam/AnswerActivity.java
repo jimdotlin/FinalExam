@@ -18,7 +18,7 @@ public class AnswerActivity extends AppCompatActivity{
         question = (TextView)findViewById(R.id.question);
         question_ch = (TextView)findViewById(R.id.question_ch);
     }
-
+    
     public void  onClick(View view)
     {
         Intent home = new Intent( AnswerActivity.this , MainActivity.class);
