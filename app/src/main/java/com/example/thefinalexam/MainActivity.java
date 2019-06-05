@@ -1,14 +1,16 @@
 package com.example.thefinalexam;
 
-import android.content.Context;
+import android.content.ContentValues;
 import android.content.Intent;
+import android.database.Cursor;
 import android.net.Uri;
+import android.nfc.Tag;
+import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.support.v7.widget.helper.ItemTouchHelper;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -21,7 +23,7 @@ public class MainActivity extends AppCompatActivity {
 
     ArrayList<Actress> ACTRESS_ITEMS = new ArrayList<>();
 
-
+    private final String TAG = "MainActivity";
     private Adapter mAdapter;
     private RecyclerView mList;
 
@@ -29,6 +31,19 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        Uri ActressUri = Uri.parse("content://com.example.thefinalexam.ActressProvider/actress");
+        ContentValues contentValues = new ContentValues();
+        contentValues.put("ActressName", "上原亞衣");
+        getContentResolver().insert(ActressUri, contentValues);
+        Cursor ActressCursor = getContentResolver().query(ActressUri, new String[]{"_id", "ActressName"}, null, null, null);
+        if (ActressCursor != null) {
+            while (ActressCursor.moveToNext()) {
+                Log.e(TAG, "ID:" + ActressCursor.getInt(ActressCursor.getColumnIndex("_id"))
+                        + "  ActressName:" + ActressCursor.getString(ActressCursor.getColumnIndex("ActressName")));
+            }
+            ActressCursor.close();
+        }
 
         mList = (RecyclerView) findViewById(R.id.recyclerViewTasks);
 
