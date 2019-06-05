@@ -9,6 +9,9 @@ import android.support.v7.widget.RecyclerView;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Toast;
+
+import java.time.Instant;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -19,6 +22,14 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        //data binding test
+        String passed = getIntent().getStringExtra("pass");
+        if(passed != null)
+        {
+            Toast.makeText(this,passed,Toast.LENGTH_LONG).show();
+        }
+
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 

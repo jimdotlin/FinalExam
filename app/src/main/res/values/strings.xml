@@ -2,4 +2,23 @@
     <string name="app_name">theFinalExam</string>
     <string name="Action_settings">設定</string>
     <string name="title_activity_setting">SettingActivity</string>
+
+    <string name="voc_input">Voc</string>
+    <string name="voc_name">單字名稱：</string>
+    <string name="voc_new"> 新增單字</string>
+
+    <string name="question_title">牛刀小試</string>
+    <string name="question_english">一、選擇題（英翻中）</string>
+    <string name="question_chinese"> 二、翻譯題（中翻英）</string>
+    <string name="question_one">1</string>
+    <string name="question_two">2</string>
+    <string name="question_three">3</string>
+    <string name="question_ans">Your answer: </string>
+    <string name="question_que">Question: </string>
+
+    <string name="answer_answer">公布答案</string>
+    <string name="answer_eng">一、解答</string>
+    <string name="answer_ch">二、解答</string>
+
+
 </resources>

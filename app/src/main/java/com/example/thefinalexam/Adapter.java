@@ -125,4 +125,5 @@ public class Adapter extends RecyclerView.Adapter<Adapter.NumberViewHolder> {
             listItemNumberView.setText(String.valueOf(listIndex));
         }
     }
+
 }
