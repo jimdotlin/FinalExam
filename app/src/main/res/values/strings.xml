@@ -1,5 +1,4 @@
 <resources>
-    <string name="app_name">theFinalExam</string>
+    <string name="app_name">夢想</string>
     <string name="Action_settings">設定</string>
-    <string name="title_activity_setting">SettingActivity</string>
 </resources>

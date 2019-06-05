@@ -1,37 +1,69 @@
 package com.example.thefinalexam;
 
+import android.content.Context;
 import android.content.Intent;
+import android.net.Uri;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.helper.ItemTouchHelper;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Toast;
+
+import java.util.ArrayList;
+
 
 public class MainActivity extends AppCompatActivity {
 
-    private static final int NUM_LIST_ITEMS = 100;
+    ArrayList<Actress> ACTRESS_ITEMS = new ArrayList<>();
+
 
     private Adapter mAdapter;
-    private RecyclerView mNumbersList;
+    private RecyclerView mList;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        mNumbersList = (RecyclerView) findViewById(R.id.recyclerViewTasks);
+        mList = (RecyclerView) findViewById(R.id.recyclerViewTasks);
+
+        ACTRESS_ITEMS.add(new Actress("上原亞衣","E","155","55","20","https://i.imgur.com/O2AYCeh.jpg"));
+        ACTRESS_ITEMS.add(new Actress("asd"," ","155","55","20","http://i.imgur.com/mVpDmzc.jpg"));
+        ACTRESS_ITEMS.add(new Actress("zxc","A","155","55","20","http://i.imgur.com/mVpDmzc.jpg"));
+        ACTRESS_ITEMS.add(new Actress("qwe","A","155","55","20","http://i.imgur.com/mVpDmzc.jpg"));
+        ACTRESS_ITEMS.add(new Actress("fgh","A","155","55","20","http://i.imgur.com/mVpDmzc.jpg"));
+        ACTRESS_ITEMS.add(new Actress("hjk","A","155","55","20","http://i.imgur.com/mVpDmzc.jpg"));
+        ACTRESS_ITEMS.add(new Actress("bnm","A","155","55","20","http://i.imgur.com/mVpDmzc.jpg"));
+
+
 
         LinearLayoutManager layoutManager = new LinearLayoutManager(this);
-        mNumbersList.setLayoutManager(layoutManager);
-        mNumbersList.setHasFixedSize(true);
+        mList.setLayoutManager(layoutManager);
+        mList.setHasFixedSize(true);
 
-        mAdapter = new Adapter(NUM_LIST_ITEMS);
+        mAdapter = new Adapter(this, ACTRESS_ITEMS);
 
-        mNumbersList.setAdapter(mAdapter);
+        mList.setAdapter(mAdapter);
+        mAdapter.setOnItemClickListener(new Adapter.OnItemClickListener(){
+            @Override
+            public void onItemClick(View view , int position){
+                Toast.makeText(MainActivity.this, ACTRESS_ITEMS.get(position).getName(), 600).show();
 
+                Intent intent = new Intent(MainActivity.this, DetailActivity.class);
+                intent.putExtra("ActressName",ACTRESS_ITEMS.get(position).getName());
+                intent.putExtra("ActressCup", ACTRESS_ITEMS.get(position).getCup());
+                intent.putExtra("ActressHeight", ACTRESS_ITEMS.get(position).getHeight());
+                intent.putExtra("ActressWeight", ACTRESS_ITEMS.get(position).getWeight());
+                intent.putExtra("ActressAge",ACTRESS_ITEMS.get(position).getAge());
+                intent.putExtra("ImageUrl",ACTRESS_ITEMS.get(position).getPosterThumbnailUrl());
+                startActivity(intent);
+            }
+        });
 
         FloatingActionButton fab = findViewById(R.id.floatingActionButton);
         fab.setOnClickListener(new View.OnClickListener() {
@@ -43,6 +75,8 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
+
+
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.manu, menu);
@@ -52,7 +86,7 @@ public class MainActivity extends AppCompatActivity {
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
-        switch (id){
+           switch (id){
             case R.id.action_settings :
                 Intent SettingIntent = new Intent(MainActivity.this, SettingActivity.class);
                 startActivity(SettingIntent);
