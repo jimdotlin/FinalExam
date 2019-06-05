@@ -31,16 +31,24 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
+//-----------------------------------------------------------------------------------------------------
         Uri ActressUri = Uri.parse("content://com.example.thefinalexam.ActressProvider/actress");
         ContentValues contentValues = new ContentValues();
-        contentValues.put("ActressName", "上原亞衣");
+        getContentResolver().delete(ActressUri,null,null);//  ----清除表格----
+        contentValues.put("ActressName", "三上優雅");
+        contentValues.put("ActressCup","z");
+        contentValues.put("ActressAge","20");
+        contentValues.put("PosterUrl","https://i.imgur.com/gn1XeZ2.jpg");
         getContentResolver().insert(ActressUri, contentValues);
-        Cursor ActressCursor = getContentResolver().query(ActressUri, new String[]{"_id", "ActressName"}, null, null, null);
+        Cursor ActressCursor = getContentResolver().query(ActressUri, new String[]{"_id", "ActressName","ActressCup","ActressAge","PosterUrl"}, null, null, null);
         if (ActressCursor != null) {
             while (ActressCursor.moveToNext()) {
                 Log.e(TAG, "ID:" + ActressCursor.getInt(ActressCursor.getColumnIndex("_id"))
-                        + "  ActressName:" + ActressCursor.getString(ActressCursor.getColumnIndex("ActressName")));
+                        + "  ActressName:" + ActressCursor.getString(ActressCursor.getColumnIndex("ActressName"))
+                +"  ActressCup:"+ActressCursor.getString(ActressCursor.getColumnIndex("ActressCup"))
+                +"  ActressAge:"+ActressCursor.getString(ActressCursor.getColumnIndex("ActressAge")));
+                ACTRESS_ITEMS.add(new Actress(ActressCursor.getString(ActressCursor.getColumnIndex("ActressName")),ActressCursor.getString(ActressCursor.getColumnIndex("ActressCup")),"155","55",ActressCursor.getString(ActressCursor.getColumnIndex("ActressAge")),ActressCursor.getString(ActressCursor.getColumnIndex("PosterUrl"))));
+
             }
             ActressCursor.close();
         }
@@ -48,11 +56,6 @@ public class MainActivity extends AppCompatActivity {
         mList = (RecyclerView) findViewById(R.id.recyclerViewTasks);
 
         ACTRESS_ITEMS.add(new Actress("上原亞衣","E","155","55","20","https://i.imgur.com/O2AYCeh.jpg"));
-        ACTRESS_ITEMS.add(new Actress("asd"," ","155","55","20","http://i.imgur.com/mVpDmzc.jpg"));
-        ACTRESS_ITEMS.add(new Actress("zxc","A","155","55","20","http://i.imgur.com/mVpDmzc.jpg"));
-        ACTRESS_ITEMS.add(new Actress("qwe","A","155","55","20","http://i.imgur.com/mVpDmzc.jpg"));
-        ACTRESS_ITEMS.add(new Actress("fgh","A","155","55","20","http://i.imgur.com/mVpDmzc.jpg"));
-        ACTRESS_ITEMS.add(new Actress("hjk","A","155","55","20","http://i.imgur.com/mVpDmzc.jpg"));
         ACTRESS_ITEMS.add(new Actress("bnm","A","155","55","20","http://i.imgur.com/mVpDmzc.jpg"));
 
 
