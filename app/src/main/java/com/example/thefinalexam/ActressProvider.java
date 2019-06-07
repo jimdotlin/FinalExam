@@ -51,9 +51,9 @@ public class ActressProvider extends ContentProvider {
         sqLiteDatabase = new DBOpenHelper(context).getWritableDatabase();
         sqLiteDatabase.beginTransaction();
         ContentValues contentValues = new ContentValues();
-        contentValues.put("ActressName", "初始資料1");
-        contentValues.put("ActressCup", "初始資料2");
-        contentValues.put("ActressAge", "初始資料3");
+//        contentValues.put("ActressName", "初始資料1");
+//        contentValues.put("ActressCup", "初始資料2");
+//        contentValues.put("ActressAge", "初始資料3");
         sqLiteDatabase.insert(DBOpenHelper.ACTRESS_TABLE_NAME, null, contentValues);
         contentValues.clear();
 

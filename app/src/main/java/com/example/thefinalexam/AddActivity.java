@@ -28,20 +28,25 @@ public class AddActivity extends AppCompatActivity {
         addHeight = (EditText) findViewById(R.id.editHeight);
         addAge = (EditText) findViewById(R.id.editAge);
         addUrl = (EditText) findViewById(R.id.editUrl);
-    }
+        addButton.setOnClickListener(new Button.OnClickListener(){
 
-    public void OnClick(View view){
-
-        Uri ActressUri = Uri.parse("content://com.example.thefinalexam.ActressProvider/actress");
-        ContentValues contentValues = new ContentValues();
+            @Override
+            public void onClick(View view){
+                Uri ActressUri = Uri.parse("content://com.example.thefinalexam.ActressProvider/actress");
+                ContentValues contentValues = new ContentValues();
 //        getContentResolver().delete(ActressUri,null,null);//  -------清除表格-------
-        contentValues.put("ActressName",addName.getText().toString());
-        contentValues.put("ActressCup",addCup.getText().toString());
-        contentValues.put("ActressHeight",addHeight.getText().toString());
-        contentValues.put("ActressAge",addAge.getText().toString());
-        contentValues.put("PosterUrl",addUrl.getText().toString());
-        getContentResolver().insert(ActressUri, contentValues);
-        Intent mainIntent = new Intent( AddActivity.this , MainActivity.class);
-        startActivity(mainIntent);
+                contentValues.put("ActressName",addName.getText().toString());
+                contentValues.put("ActressCup",addCup.getText().toString());
+                contentValues.put("ActressHeight",addHeight.getText().toString());
+                contentValues.put("ActressAge",addAge.getText().toString());
+                contentValues.put("PosterUrl",addUrl.getText().toString());
+                getContentResolver().insert(ActressUri, contentValues);
+                Intent mainIntent = new Intent( AddActivity.this , MainActivity.class);
+                startActivity(mainIntent);
+            }
+        })
+        ;
     }
+
+
 }

@@ -33,20 +33,21 @@ public class MainActivity extends AppCompatActivity {
 //-----------------------------------------------------------------------------------------------------
         Uri ActressUri = Uri.parse("content://com.example.thefinalexam.ActressProvider/actress");
         ContentValues contentValues = new ContentValues();
-        getContentResolver().delete(ActressUri,null,null);//  ----清除表格----
-        contentValues.put("ActressName", "三上優雅");
-        contentValues.put("ActressCup","z");
-        contentValues.put("ActressAge","20");
-        contentValues.put("PosterUrl","https://i.imgur.com/gn1XeZ2.jpg");
-        getContentResolver().insert(ActressUri, contentValues);
-        Cursor ActressCursor = getContentResolver().query(ActressUri, new String[]{"_id", "ActressName","ActressCup","ActressAge","PosterUrl"}, null, null, null);
+//        getContentResolver().delete(ActressUri,null,null);//  ----清除表格----
+//        contentValues.put("ActressName", "三上優雅");
+//        contentValues.put("ActressCup","z");
+//        contentValues.put("ActressAge","20");
+//        contentValues.put("PosterUrl","https://i.imgur.com/gn1XeZ2.jpg");
+//        getContentResolver().insert(ActressUri, contentValues);
+        Cursor ActressCursor = getContentResolver().query(ActressUri, new String[]{"_id", "ActressName","ActressCup","ActressAge","ActressHeight","PosterUrl"}, null, null, null);
         if (ActressCursor != null) {
             while (ActressCursor.moveToNext()) {
                 Log.e(TAG, "ID:" + ActressCursor.getInt(ActressCursor.getColumnIndex("_id"))
                         + "  ActressName:" + ActressCursor.getString(ActressCursor.getColumnIndex("ActressName"))
                 +"  ActressCup:"+ActressCursor.getString(ActressCursor.getColumnIndex("ActressCup"))
-                +"  ActressAge:"+ActressCursor.getString(ActressCursor.getColumnIndex("ActressAge")));
-                ACTRESS_ITEMS.add(new Actress(ActressCursor.getString(ActressCursor.getColumnIndex("ActressName")),ActressCursor.getString(ActressCursor.getColumnIndex("ActressCup")),"155",ActressCursor.getString(ActressCursor.getColumnIndex("ActressAge")),ActressCursor.getString(ActressCursor.getColumnIndex("PosterUrl"))));
+                +"  ActressAge:"+ActressCursor.getString(ActressCursor.getColumnIndex("ActressAge"))
+                        +"  ActressHeight:"+ActressCursor.getString(ActressCursor.getColumnIndex("ActressHeight")));
+                ACTRESS_ITEMS.add(new Actress(ActressCursor.getString(ActressCursor.getColumnIndex("ActressName")),ActressCursor.getString(ActressCursor.getColumnIndex("ActressCup")),ActressCursor.getString(ActressCursor.getColumnIndex("ActressHeight")),ActressCursor.getString(ActressCursor.getColumnIndex("ActressAge")),ActressCursor.getString(ActressCursor.getColumnIndex("PosterUrl"))));
 
             }
             ActressCursor.close();

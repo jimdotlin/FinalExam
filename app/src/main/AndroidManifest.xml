@@ -16,7 +16,7 @@
         <activity android:name=".QuestionActivity" />
         <activity
             android:name=".SettingActivity"
-            android:label="@string/Action_settings"
+            android:label="@string/action_settings"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity android:name=".MainActivity">
             <intent-filter>
