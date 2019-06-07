@@ -4,7 +4,6 @@ import android.content.ContentValues;
 import android.content.Intent;
 import android.database.Cursor;
 import android.net.Uri;
-import android.nfc.Tag;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
@@ -47,7 +46,7 @@ public class MainActivity extends AppCompatActivity {
                         + "  ActressName:" + ActressCursor.getString(ActressCursor.getColumnIndex("ActressName"))
                 +"  ActressCup:"+ActressCursor.getString(ActressCursor.getColumnIndex("ActressCup"))
                 +"  ActressAge:"+ActressCursor.getString(ActressCursor.getColumnIndex("ActressAge")));
-                ACTRESS_ITEMS.add(new Actress(ActressCursor.getString(ActressCursor.getColumnIndex("ActressName")),ActressCursor.getString(ActressCursor.getColumnIndex("ActressCup")),"155","55",ActressCursor.getString(ActressCursor.getColumnIndex("ActressAge")),ActressCursor.getString(ActressCursor.getColumnIndex("PosterUrl"))));
+                ACTRESS_ITEMS.add(new Actress(ActressCursor.getString(ActressCursor.getColumnIndex("ActressName")),ActressCursor.getString(ActressCursor.getColumnIndex("ActressCup")),"155",ActressCursor.getString(ActressCursor.getColumnIndex("ActressAge")),ActressCursor.getString(ActressCursor.getColumnIndex("PosterUrl"))));
 
             }
             ActressCursor.close();
@@ -55,8 +54,8 @@ public class MainActivity extends AppCompatActivity {
 
         mList = (RecyclerView) findViewById(R.id.recyclerViewTasks);
 
-        ACTRESS_ITEMS.add(new Actress("上原亞衣","E","155","55","20","https://i.imgur.com/O2AYCeh.jpg"));
-        ACTRESS_ITEMS.add(new Actress("bnm","A","155","55","20","http://i.imgur.com/mVpDmzc.jpg"));
+        ACTRESS_ITEMS.add(new Actress("上原亞衣","E","155","20","https://i.imgur.com/O2AYCeh.jpg"));
+        ACTRESS_ITEMS.add(new Actress("bnm","A","155","20","http://i.imgur.com/mVpDmzc.jpg"));
 
 
 
@@ -67,6 +66,7 @@ public class MainActivity extends AppCompatActivity {
         mAdapter = new Adapter(this, ACTRESS_ITEMS);
 
         mList.setAdapter(mAdapter);
+        //------------------------------------------Click to Detail view-----------------------------------
         mAdapter.setOnItemClickListener(new Adapter.OnItemClickListener(){
             @Override
             public void onItemClick(View view , int position){
@@ -76,13 +76,13 @@ public class MainActivity extends AppCompatActivity {
                 intent.putExtra("ActressName",ACTRESS_ITEMS.get(position).getName());
                 intent.putExtra("ActressCup", ACTRESS_ITEMS.get(position).getCup());
                 intent.putExtra("ActressHeight", ACTRESS_ITEMS.get(position).getHeight());
-                intent.putExtra("ActressWeight", ACTRESS_ITEMS.get(position).getWeight());
                 intent.putExtra("ActressAge",ACTRESS_ITEMS.get(position).getAge());
                 intent.putExtra("ImageUrl",ACTRESS_ITEMS.get(position).getPosterThumbnailUrl());
                 startActivity(intent);
             }
         });
 
+        //-------------------------------------Click to Question view---------------------------------------
         FloatingActionButton fab = findViewById(R.id.floatingActionButton);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override

@@ -13,7 +13,7 @@ public class DBOpenHelper extends SQLiteOpenHelper {
     public static final String ACTRESS_TABLE_NAME = "actress";
 
     private final String CREATE_ACTRESS_TABLE = "create table " + ACTRESS_TABLE_NAME
-            + "(_id integer primary key autoincrement, ActressName text, ActressCup text, ActressAge text, ActressHeight text, ActressWeight text,PosterUrl text)";
+            + "(_id integer primary key autoincrement, ActressName text, ActressCup text, ActressAge text, ActressHeight text,PosterUrl text)";
 
 
     public DBOpenHelper(Context context) {

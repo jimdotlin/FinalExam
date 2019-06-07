@@ -9,11 +9,10 @@ public class Actress {
     private String age;
     private String posterThumbnailUrl;
 
-    public Actress(String name, String cup, String height, String weight, String age, String posterThumbnailUrl) {
+    public Actress(String name, String cup, String height, String age, String posterThumbnailUrl) {
         this.name = name;
         this.cup = cup;
         this.height = height;
-        this.weight = weight;
         this.age = age;
         this.posterThumbnailUrl = posterThumbnailUrl;
     }
@@ -51,14 +50,6 @@ public class Actress {
 
     public void setHeight(String height) {
         this.height = height;
-    }
-
-    public String getWeight() {
-        return weight;
-    }
-
-    public void setWeight(String weight) {
-        this.weight = weight;
     }
 
     public String getAge() {

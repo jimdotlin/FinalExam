@@ -21,15 +21,14 @@ public class DetailActivity extends AppCompatActivity {
             String ActressName = getIntent().getStringExtra("ActressName");
             String ActressCup = getIntent().getStringExtra("ActressCup");
             String ActressHeight = getIntent().getStringExtra("ActressHeight");
-            String ActressWeight = getIntent().getStringExtra("ActressWeight");
             String ActressAge = getIntent().getStringExtra("ActressAge");
             String ActressUrl = getIntent().getStringExtra("ImageUrl");
-            setContent(ActressName,ActressUrl,ActressCup,ActressHeight,ActressWeight,ActressAge);
+            setContent(ActressName,ActressUrl,ActressCup,ActressHeight,ActressAge);
 //        }
 
     }
 
-    private void setContent(String ActressName,String ActressUrl,String ActressCup,String ActressHeight,String ActressWeight,String ActressAge){
+    private void setContent(String ActressName,String ActressUrl,String ActressCup,String ActressHeight,String ActressAge){
         TextView Name = findViewById(R.id.NameView);
         Name.setText("女優："+ActressName);
         TextView Cup = findViewById(R.id.CupView);
@@ -38,8 +37,6 @@ public class DetailActivity extends AppCompatActivity {
         Age.setText("年齡："+ActressAge);
         TextView Height = findViewById(R.id.HeightView);
         Height.setText("身高："+ActressHeight);
-        TextView Weight = findViewById(R.id.WeightView);
-        Weight.setText("體重："+ActressWeight);
         ImageView image = findViewById(R.id.ActressimageView);
         Glide.with(this)
                 .load(ActressUrl)

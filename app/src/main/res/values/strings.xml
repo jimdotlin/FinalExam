@@ -1,4 +1,14 @@
 <resources>
     <string name="app_name">夢想</string>
-    <string name="Action_settings">設定</string>
+    <string name="action_settings">設定</string>
+    <string name="action_add">Add</string>
+    <string name="action_sort">Sort</string>
+    <string name="actressimageView">ActressimageView</string>
+    <string name="TextView">TextView</string>
+    <string name="actressName">女優</string>
+    <string name="actressCup">三圍</string>
+    <string name="actressHeight">身高</string>
+    <string name="actressAge">年齡</string>
+    <string name="actressUrl">圖片連結</string>
+    <string name="addButton">新增</string>
 </resources>
