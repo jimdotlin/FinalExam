@@ -69,6 +69,7 @@ public class Adapter extends RecyclerView.Adapter<Adapter.ViewHolder> implements
 
 
 
+
     @Override
     public int getItemCount() {
         return mData.size();

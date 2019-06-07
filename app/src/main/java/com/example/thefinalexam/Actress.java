@@ -2,14 +2,15 @@ package com.example.thefinalexam;
 
 public class Actress {
 
+    private String id;
     private String name;
     private String cup;
     private String height;
-    private String weight;
     private String age;
     private String posterThumbnailUrl;
 
-    public Actress(String name, String cup, String height, String age, String posterThumbnailUrl) {
+    public Actress(String id,String name, String cup, String height, String age, String posterThumbnailUrl) {
+        this.id = id;
         this.name = name;
         this.cup = cup;
         this.height = height;
@@ -18,6 +19,14 @@ public class Actress {
     }
 
     public Actress() {
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
     }
 
     public String getPosterThumbnailUrl() {

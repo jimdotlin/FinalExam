@@ -9,6 +9,7 @@ import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.helper.ItemTouchHelper;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -47,7 +48,7 @@ public class MainActivity extends AppCompatActivity {
                 +"  ActressCup:"+ActressCursor.getString(ActressCursor.getColumnIndex("ActressCup"))
                 +"  ActressAge:"+ActressCursor.getString(ActressCursor.getColumnIndex("ActressAge"))
                         +"  ActressHeight:"+ActressCursor.getString(ActressCursor.getColumnIndex("ActressHeight")));
-                ACTRESS_ITEMS.add(new Actress(ActressCursor.getString(ActressCursor.getColumnIndex("ActressName")),ActressCursor.getString(ActressCursor.getColumnIndex("ActressCup")),ActressCursor.getString(ActressCursor.getColumnIndex("ActressHeight")),ActressCursor.getString(ActressCursor.getColumnIndex("ActressAge")),ActressCursor.getString(ActressCursor.getColumnIndex("PosterUrl"))));
+                ACTRESS_ITEMS.add(new Actress(ActressCursor.getString(ActressCursor.getColumnIndex("_id")),ActressCursor.getString(ActressCursor.getColumnIndex("ActressName")),ActressCursor.getString(ActressCursor.getColumnIndex("ActressCup")),ActressCursor.getString(ActressCursor.getColumnIndex("ActressHeight")),ActressCursor.getString(ActressCursor.getColumnIndex("ActressAge")),ActressCursor.getString(ActressCursor.getColumnIndex("PosterUrl"))));
 
             }
             ActressCursor.close();
@@ -55,14 +56,15 @@ public class MainActivity extends AppCompatActivity {
 
         mList = (RecyclerView) findViewById(R.id.recyclerViewTasks);
 
-        ACTRESS_ITEMS.add(new Actress("上原亞衣","E","155","20","https://i.imgur.com/O2AYCeh.jpg"));
-        ACTRESS_ITEMS.add(new Actress("bnm","A","155","20","http://i.imgur.com/mVpDmzc.jpg"));
+//        ACTRESS_ITEMS.add(new Actress("上原亞衣","E","155","20","https://i.imgur.com/O2AYCeh.jpg"));
+//        ACTRESS_ITEMS.add(new Actress("bnm","A","155","20","http://i.imgur.com/mVpDmzc.jpg"));
 
 
 
         LinearLayoutManager layoutManager = new LinearLayoutManager(this);
         mList.setLayoutManager(layoutManager);
         mList.setHasFixedSize(true);
+
 
         mAdapter = new Adapter(this, ACTRESS_ITEMS);
 
@@ -74,6 +76,7 @@ public class MainActivity extends AppCompatActivity {
                 Toast.makeText(MainActivity.this, ACTRESS_ITEMS.get(position).getName(), 600).show();
 
                 Intent intent = new Intent(MainActivity.this, DetailActivity.class);
+                intent.putExtra("Id",ACTRESS_ITEMS.get(position).getId());
                 intent.putExtra("ActressName",ACTRESS_ITEMS.get(position).getName());
                 intent.putExtra("ActressCup", ACTRESS_ITEMS.get(position).getCup());
                 intent.putExtra("ActressHeight", ACTRESS_ITEMS.get(position).getHeight());
@@ -82,6 +85,30 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+
+
+        new ItemTouchHelper(new ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.LEFT | ItemTouchHelper.RIGHT) {
+            @Override
+            public boolean onMove(RecyclerView recyclerView, RecyclerView.ViewHolder viewHolder, RecyclerView.ViewHolder target) {
+                return false;
+            }
+
+            // Called when a user swipes left or right on a ViewHolder
+            @Override
+            public void onSwiped(RecyclerView.ViewHolder viewHolder, int swipeDir) {
+                int position = viewHolder.getAdapterPosition();
+                Uri ActressUri = Uri.parse("content://com.example.thefinalexam.ActressProvider/actress");
+                getContentResolver().delete(ActressUri,"_id="+ACTRESS_ITEMS.get(position).getId(),null);
+                ACTRESS_ITEMS.remove(position);
+                mAdapter.notifyItemRemoved(position);
+            }
+
+
+        }).attachToRecyclerView(mList);
+
+
+
+
 
         //-------------------------------------Click to Question view---------------------------------------
         FloatingActionButton fab = findViewById(R.id.floatingActionButton);

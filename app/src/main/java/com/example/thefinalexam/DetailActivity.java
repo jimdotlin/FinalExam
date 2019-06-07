@@ -18,6 +18,7 @@ public class DetailActivity extends AppCompatActivity {
 
     private void getIncomingIntent(){
 //        if(getIntent().hasExtra("ActressName") && getIntent().hasExtra("ImageUrl")){
+            String ID = getIntent().getStringExtra("Id");//這裡有ID可以用
             String ActressName = getIntent().getStringExtra("ActressName");
             String ActressCup = getIntent().getStringExtra("ActressCup");
             String ActressHeight = getIntent().getStringExtra("ActressHeight");
