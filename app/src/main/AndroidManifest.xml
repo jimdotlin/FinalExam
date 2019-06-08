@@ -3,7 +3,7 @@
     package="com.example.thefinalexam">
 
     <uses-permission android:name="android.permission.INTERNET" />
-    
+
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -11,7 +11,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".DetailActivity"></activity>
+        <activity android:name=".EditActivity"></activity>
+        <activity android:name=".DetailActivity" />
         <activity android:name=".AddActivity" />
         <activity android:name=".QuestionActivity" />
         <activity
@@ -25,9 +26,10 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
         <provider
-            android:authorities="com.example.thefinalexam.ActressProvider"
-            android:name="com.example.thefinalexam.ActressProvider"/>
+            android:name=".ActressProvider"
+            android:authorities="com.example.thefinalexam.ActressProvider" />
     </application>
 
 </manifest>

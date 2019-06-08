@@ -22,7 +22,7 @@ public class AddActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add);
-        addButton = (Button)findViewById(R.id.addButton);
+        addButton = (Button)findViewById(R.id.finishButton);
         addName = (EditText) findViewById(R.id.editName);
         addCup = (EditText) findViewById(R.id.editCup);
         addHeight = (EditText) findViewById(R.id.editHeight);
@@ -44,8 +44,7 @@ public class AddActivity extends AppCompatActivity {
                 Intent mainIntent = new Intent( AddActivity.this , MainActivity.class);
                 startActivity(mainIntent);
             }
-        })
-        ;
+        });
     }
 
 
