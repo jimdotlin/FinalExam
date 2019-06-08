@@ -55,7 +55,7 @@ public class MainActivity extends AppCompatActivity{
             @Override
             public void onItemClick(View view , int position){
 
-                Toast.makeText(MainActivity.this, ACTRESS_ITEMS.get(position).getName(), 600).show();
+                Toast.makeText(MainActivity.this, ACTRESS_ITEMS.get(position).getName(), Toast.LENGTH_LONG).show();
 
                 Intent intent = new Intent(MainActivity.this, DetailActivity.class);
                 intent.putExtra("Id",ACTRESS_ITEMS.get(position).getId());
@@ -91,8 +91,13 @@ public class MainActivity extends AppCompatActivity{
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent QuestionIntent = new Intent(MainActivity.this, QuestionActivity.class);
-                startActivity(QuestionIntent);
+                if(!ACTRESS_ITEMS.isEmpty()){
+                    Intent QuestionIntent = new Intent(MainActivity.this, QuestionActivity.class);
+                    startActivity(QuestionIntent);
+                }else{
+                    Toast.makeText(MainActivity.this, "請先新增女優!!", Toast.LENGTH_LONG).show();
+                }
+
             }
         });
     }
@@ -119,20 +124,23 @@ public class MainActivity extends AppCompatActivity{
                 startActivity(addIntent);
                 break;
             case R.id.action_sort :
-                if(clickNum == 0){
-                    clickNum++;
-                    sortStr = "ActressName";
-                }else if(clickNum == 1){
-                    clickNum++;
-                    sortStr = "ActressCup";
-                }else if(clickNum == 2){
-                    clickNum = 0;
-                    sortStr = "ActressAge";
+                if(!ACTRESS_ITEMS.isEmpty()){
+                    if(clickNum == 0){
+                        clickNum++;
+                        sortStr = "ActressName";
+                    }else if(clickNum == 1){
+                        clickNum++;
+                        sortStr = "ActressCup";
+                    }else if(clickNum == 2){
+                        clickNum = 0;
+                        sortStr = "ActressAge";
+                    }
+                    ACTRESS_ITEMS.clear();
+                    mAdapter.notifyDataSetChanged();
+                    getData(sortStr);
+                }else{
+                    Toast.makeText(MainActivity.this, "請先新增女優!!", Toast.LENGTH_LONG).show();
                 }
-                ACTRESS_ITEMS.clear();
-                mAdapter.notifyDataSetChanged();
-                getData(sortStr);
-
         }
         return super.onOptionsItemSelected(item);
     }
