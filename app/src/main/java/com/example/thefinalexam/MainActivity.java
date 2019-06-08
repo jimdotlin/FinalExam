@@ -38,10 +38,6 @@ public class MainActivity extends AppCompatActivity{
 
         mList = (RecyclerView) findViewById(R.id.recyclerViewTasks);
 
-//        ACTRESS_ITEMS.add(new Actress("上原亞衣","E","155","20","https://i.imgur.com/O2AYCeh.jpg"));
-//        ACTRESS_ITEMS.add(new Actress("bnm","A","155","20","http://i.imgur.com/mVpDmzc.jpg"));
-
-
 
         LinearLayoutManager layoutManager = new LinearLayoutManager(this);
         mList.setLayoutManager(layoutManager);
@@ -89,10 +85,6 @@ public class MainActivity extends AppCompatActivity{
                 mAdapter.notifyDataSetChanged();
             }
         }).attachToRecyclerView(mList);
-
-
-
-
 
         //---------------------------------Click to Question view----------------------------------------------
         FloatingActionButton fab = findViewById(R.id.floatingActionButton);

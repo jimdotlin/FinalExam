@@ -12,4 +12,7 @@
     <string name="actressUrl">圖片連結</string>
     <string name="addButton">新增</string>
     <string name="finishButton">完成</string>
+    <string name="yes">是</string>
+    <string name="no">否</string>
+    <string name="confirm">確認</string>
 </resources>
