@@ -20,6 +20,6 @@
         android:layout_gravity="bottom|end"
         android:layout_margin="@dimen/fab_margin"
         android:tint="@android:color/white"
-        app:srcCompat="@android:drawable/presence_online" />
+        app:srcCompat="@drawable/ic_school_black_24dp" />
 
 </FrameLayout>

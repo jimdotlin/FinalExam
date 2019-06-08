@@ -2,127 +2,88 @@ package com.example.thefinalexam;
 
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
-/**
- * We couldn't come up with a good name for this class. Then, we realized
- * that this lesson is about RecyclerView.
- *
- * RecyclerView... Recycling... Saving the planet? Being green? Anyone?
- * #crickets
- *
- * Avoid unnecessary garbage collection by using RecyclerView and ViewHolders.
- *
- * If you don't like our puns, we named this Adapter Adapter because its
- * contents are green.
- */
-public class Adapter extends RecyclerView.Adapter<Adapter.NumberViewHolder> {
+import com.bumptech.glide.Glide;
 
-    private static final String TAG = Adapter.class.getSimpleName();
+import java.util.ArrayList;
 
-    private int mNumberItems;
 
-    /**
-     * Constructor for Adapter that accepts a number of items to display and the specification
-     * for the ListItemClickListener.
-     *
-     * @param numberOfItems Number of items to display in list
-     */
-    public Adapter(int numberOfItems) {
-        mNumberItems = numberOfItems;
-    }
+public class Adapter extends RecyclerView.Adapter<Adapter.ViewHolder> implements View.OnClickListener {
 
-    /**
-     *
-     * This gets called when each new ViewHolder is created. This happens when the RecyclerView
-     * is laid out. Enough ViewHolders will be created to fill the screen and allow for scrolling.
-     *
-     * @param viewGroup The ViewGroup that these ViewHolders are contained within.
-     * @param viewType  If your RecyclerView has more than one type of item (which ours doesn't) you
-     *                  can use this viewType integer to provide a different layout. See
-     *                  {@link android.support.v7.widget.RecyclerView.Adapter#getItemViewType(int)}
-     *                  for more details.
-     * @return A new NumberViewHolder that holds the View for each list item
-     */
+    private Context mContext;
+    private ArrayList<Actress> mData;
+
     @Override
-    public NumberViewHolder onCreateViewHolder(ViewGroup viewGroup, int viewType) {
-        Context context = viewGroup.getContext();
-        int layoutIdForListItem = R.layout.list_item;
-        LayoutInflater inflater = LayoutInflater.from(context);
-        boolean shouldAttachToParentImmediately = false;
-
-        View view = inflater.inflate(layoutIdForListItem, viewGroup, shouldAttachToParentImmediately);
-        NumberViewHolder viewHolder = new NumberViewHolder(view);
-
-        return viewHolder;
+    public void onClick(View view) {
+        if (mOnItemClickListener != null) {
+            mOnItemClickListener.onItemClick(view,(int)view.getTag());
+        }
     }
 
-    /**
-     * OnBindViewHolder is called by the RecyclerView to display the data at the specified
-     * position. In this method, we update the contents of the ViewHolder to display the correct
-     * indices in the list for this particular position, using the "position" argument that is conveniently
-     * passed into us.
-     *
-     * @param holder   The ViewHolder which should be updated to represent the contents of the
-     *                 item at the given position in the data set.
-     * @param position The position of the item within the adapter's data set.
-     */
+    public void setOnItemClickListener(OnItemClickListener listener) {
+        this.mOnItemClickListener = listener;
+    }
+
+    public static interface OnItemClickListener {
+        void onItemClick(View view , int position);
+    }
+
+
+    private OnItemClickListener mOnItemClickListener = null;
+
+
+    public Adapter(Context context, ArrayList<Actress> data) {
+        this.mContext = context;
+        this.mData = data;
+    }
+
     @Override
-    public void onBindViewHolder(NumberViewHolder holder, int position) {
-        Log.d(TAG, "#" + position);
-        holder.bind(position);
+    public ViewHolder onCreateViewHolder(ViewGroup parent,
+                                         int viewType) {
+        View view = LayoutInflater.from(mContext)
+                .inflate(R.layout.list_item, parent, false);
+        ViewHolder holder = new ViewHolder(view);
+
+        holder.ivPosterThumbnail = (ImageView) view.findViewById(R.id.ivPosterThumbnail);
+        holder.tvPosterName = (TextView) view.findViewById(R.id.tvPosterName);
+        holder.tvContent = (TextView) view.findViewById(R.id.tvContent);
+        view.setOnClickListener(this);
+        return holder;
     }
 
-    /**
-     * This method simply returns the number of items to display. It is used behind the scenes
-     * to help layout our Views and for animations.
-     *
-     * @return The number of items available in our forecast
-     */
+    @Override
+    public void onBindViewHolder(ViewHolder holder, int position) {
+        Actress actress = mData.get(position);
+        holder.tvPosterName.setText(actress.getName());
+        holder.tvContent.setText(actress.getCup());
+        Glide.with(mContext)
+                .load(actress.getPosterThumbnailUrl())
+                .into(holder.ivPosterThumbnail);
+        holder.itemView.setTag(position);
+    }
+
+
+
+
     @Override
     public int getItemCount() {
-        return mNumberItems;
+        return mData.size();
     }
 
-    // COMPLETED (12) Create a class called NumberViewHolder that extends RecyclerView.ViewHolder
-    /**
-     * Cache of the children views for a list item.
-     */
-    class NumberViewHolder extends RecyclerView.ViewHolder {
 
-        // COMPLETED (13) Within NumberViewHolder, create a TextView variable called listItemNumberView
-        // Will display the position in the list, ie 0 through getItemCount() - 1
-        TextView listItemNumberView;
+    class ViewHolder extends RecyclerView.ViewHolder {
 
-        // COMPLETED (14) Create a constructor for NumberViewHolder that accepts a View called itemView as a parameter
-        /**
-         * Constructor for our ViewHolder. Within this constructor, we get a reference to our
-         * TextViews and set an onClickListener to listen for clicks. Those will be handled in the
-         * onClick method below.
-         * @param itemView The View that you inflated in
-         *                 {@link Adapter#onCreateViewHolder(ViewGroup, int)}
-         */
-        public NumberViewHolder(View itemView) {
-            // COMPLETED (15) Within the constructor, call super(itemView) and then find listItemNumberView by ID
+        public ImageView ivPosterThumbnail;
+        public TextView tvPosterName;
+        public TextView tvContent;
+
+        public ViewHolder(View itemView) {
             super(itemView);
-
-            listItemNumberView = (TextView) itemView.findViewById(R.id.tv_item_number);
-        }
-
-        // COMPLETED (16) Within the NumberViewHolder class, create a void method called bind that accepts an int parameter called listIndex
-        /**
-         * A method we wrote for convenience. This method will take an integer as input and
-         * use that integer to display the appropriate text within a list item.
-         * @param listIndex Position of the item in the list
-         */
-        void bind(int listIndex) {
-            // COMPLETED (17) Within bind, set the text of listItemNumberView to the listIndex
-            // COMPLETED (18) Be careful to get the String representation of listIndex, as using setText with an int does something different
-            listItemNumberView.setText(String.valueOf(listIndex));
         }
     }
 

@@ -1,17 +1,48 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:padding="16dp">
+    android:background="@color/white"
+    android:layout_marginTop="8dp"
+    android:layout_marginBottom="8dp"
+    android:elevation="4dp"
+    android:orientation="vertical">
 
-    <TextView
-        android:id="@+id/tv_item_number"
-        style="@style/TextAppearance.AppCompat.Title"
-        android:layout_width="wrap_content"
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_gravity="center_vertical|start"
-        android:fontFamily="monospace"
-        android:textSize="42sp"
-        tools:text="#42" />
-</FrameLayout>
+        android:orientation="horizontal"
+        android:gravity="center_vertical"
+        android:padding="16dp">
+
+        <ImageView android:id="@+id/ivPosterThumbnail"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:background="@color/gray"
+            android:scaleType="centerCrop"
+            android:contentDescription="TODO" />
+
+        <TextView android:id="@+id/tvPosterName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="16dp"
+            android:text="Poster Name"
+            android:textSize="22sp"
+            android:textColor="@color/black"/>
+    </LinearLayout>
+
+    <TextView android:id="@+id/tvContent"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="16dp"
+        android:layout_marginRight="16dp"
+        android:maxLines="5"
+        android:ellipsize="end"
+        android:text="Content example"
+        android:textColor="@color/black"
+        android:textSize="17sp"/>
+
+
+
+    </LinearLayout>

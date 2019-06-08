@@ -2,6 +2,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.thefinalexam">
 
+    <uses-permission android:name="android.permission.INTERNET" />
+
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -9,20 +11,31 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".AddActivity">
-        </activity>
-        <activity android:name=".QuestionActivity" />
+        <activity android:name=".EditActivity"
+            android:screenOrientation="portrait"></activity>
+        <activity android:name=".DetailActivity"
+            android:screenOrientation="portrait"></activity>
+        <activity android:name=".AddActivity"
+            android:screenOrientation="portrait"></activity>
+        <activity android:name=".QuestionActivity"
+            android:screenOrientation="portrait"></activity>
         <activity
             android:name=".SettingActivity"
-            android:label="@string/title_activity_setting"
-            android:theme="@style/AppTheme.NoActionBar" />
-        <activity android:name=".MainActivity">
+            android:label="@string/action_settings"
+            android:theme="@style/AppTheme.NoActionBar"
+            android:screenOrientation="portrait"></activity>
+        <activity android:name=".MainActivity"
+            android:screenOrientation="portrait">
+
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+        <provider
+            android:name=".ActressProvider"
+            android:authorities="com.example.thefinalexam.ActressProvider" />
     </application>
 
 </manifest>
