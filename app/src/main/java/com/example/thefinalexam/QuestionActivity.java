@@ -76,21 +76,5 @@ public class QuestionActivity extends AppCompatActivity {
             randomNum = (int) (Math.random() * ACTRESS_ITEMS_FOR_TEST.size());
             return randomNum;
         }
-
-        public boolean checkYesAnswer ( int randomNumForName, int randomNumForCup){
-            if (ACTRESS_ITEMS_FOR_TEST.get(randomNumForName).getCup() == ACTRESS_ITEMS_FOR_TEST.get(randomNumForCup).getCup()) {
-                return true;
-            } else {
-                return false;
-            }
-        }
-
-        public boolean checkNoAnswer ( int randomNumForName, int randomNumForCup){
-            if (ACTRESS_ITEMS_FOR_TEST.get(randomNumForName).getCup() != ACTRESS_ITEMS_FOR_TEST.get(randomNumForCup).getCup()) {
-                return true;
-            } else {
-                return false;
-            }
-        }
     }
 
