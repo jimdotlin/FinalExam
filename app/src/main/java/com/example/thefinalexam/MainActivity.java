@@ -6,7 +6,6 @@ import android.database.Cursor;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
-import android.support.v4.app.LoaderManager;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -24,17 +23,18 @@ public class MainActivity extends AppCompatActivity{
 
     ArrayList<Actress> ACTRESS_ITEMS = new ArrayList<>();
 
+    int clickNum = 0;
+    String sortStr = "";
     private final String TAG = "MainActivity";
     private Adapter mAdapter;
     private RecyclerView mList;
-    private static final int TASK_LOADER_ID = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 //----------------get database data------------------------------------------------------------
-        getData();
+        getData(sortStr);
 
         mList = (RecyclerView) findViewById(R.id.recyclerViewTasks);
 
@@ -88,8 +88,6 @@ public class MainActivity extends AppCompatActivity{
                 mAdapter.notifyItemRemoved(position);
                 mAdapter.notifyDataSetChanged();
             }
-
-
         }).attachToRecyclerView(mList);
 
 
@@ -118,6 +116,7 @@ public class MainActivity extends AppCompatActivity{
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
+
            switch (id){
             case R.id.action_settings :
                 Intent SettingIntent = new Intent(MainActivity.this, SettingActivity.class);
@@ -127,20 +126,35 @@ public class MainActivity extends AppCompatActivity{
                 Intent addIntent = new Intent(MainActivity.this, AddActivity.class);
                 startActivity(addIntent);
                 break;
+            case R.id.action_sort :
+                if(clickNum == 0){
+                    clickNum++;
+                    sortStr = "ActressName";
+                }else if(clickNum == 1){
+                    clickNum++;
+                    sortStr = "ActressCup";
+                }else if(clickNum == 2){
+                    clickNum = 0;
+                    sortStr = "ActressAge";
+                }
+                ACTRESS_ITEMS.clear();
+                mAdapter.notifyDataSetChanged();
+                getData(sortStr);
+
         }
         return super.onOptionsItemSelected(item);
     }
 
-    public void getData(){
+    public void getData(String sortStr){
         Uri ActressUri = Uri.parse("content://com.example.thefinalexam.ActressProvider/actress");
         ContentValues contentValues = new ContentValues();
 //        getContentResolver().delete(ActressUri,null,null);//  ----清除表格----
-        contentValues.put("ActressName", "三上優雅");
-        contentValues.put("ActressCup","z");
-        contentValues.put("ActressAge","20");
-        contentValues.put("PosterUrl","https://i.imgur.com/gn1XeZ2.jpg");
-        getContentResolver().insert(ActressUri, contentValues);
-        Cursor ActressCursor = getContentResolver().query(ActressUri, new String[]{"_id", "ActressName","ActressCup","ActressAge","ActressHeight","PosterUrl"}, null, null, null);
+//        contentValues.put("ActressName", "三上優雅");
+//        contentValues.put("ActressCup","z");
+//        contentValues.put("ActressAge","20");
+//        contentValues.put("PosterUrl","https://i.imgur.com/gn1XeZ2.jpg");
+//        getContentResolver().insert(ActressUri, contentValues);
+        Cursor ActressCursor = getContentResolver().query(ActressUri, new String[]{"_id", "ActressName","ActressCup","ActressAge","ActressHeight","PosterUrl"}, null, null, sortStr);
         if (ActressCursor != null) {
             while (ActressCursor.moveToNext()) {
                 Log.e(TAG, "ID:" + ActressCursor.getInt(ActressCursor.getColumnIndex("_id"))
@@ -149,8 +163,8 @@ public class MainActivity extends AppCompatActivity{
                         +"  ActressAge:"+ActressCursor.getString(ActressCursor.getColumnIndex("ActressAge"))
                         +"  ActressHeight:"+ActressCursor.getString(ActressCursor.getColumnIndex("ActressHeight")));
                 ACTRESS_ITEMS.add(new Actress(ActressCursor.getString(ActressCursor.getColumnIndex("_id")),ActressCursor.getString(ActressCursor.getColumnIndex("ActressName")),ActressCursor.getString(ActressCursor.getColumnIndex("ActressCup")),ActressCursor.getString(ActressCursor.getColumnIndex("ActressHeight")),ActressCursor.getString(ActressCursor.getColumnIndex("ActressAge")),ActressCursor.getString(ActressCursor.getColumnIndex("PosterUrl"))));
-
             }
+
             ActressCursor.close();
         }
     }

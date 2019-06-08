@@ -52,14 +52,24 @@ public class ActressProvider extends ContentProvider {
         sqLiteDatabase.beginTransaction();
         ContentValues contentValues = new ContentValues();
         contentValues.put("ActressName", "初始資料1");
+        contentValues.put("ActressCup", "b");
+        contentValues.put("ActressAge","12");
         sqLiteDatabase.insert(DBOpenHelper.ACTRESS_TABLE_NAME, null, contentValues);
         contentValues.put("ActressName", "初始資料2");
-        sqLiteDatabase.insert(DBOpenHelper.ACTRESS_TABLE_NAME, null, contentValues);
-        contentValues.put("ActressName", "初始資料3");
-        sqLiteDatabase.insert(DBOpenHelper.ACTRESS_TABLE_NAME, null, contentValues);
-        contentValues.put("ActressName", "初始資料1");
+        contentValues.put("ActressCup", "c");
+        contentValues.put("ActressAge","14");
         sqLiteDatabase.insert(DBOpenHelper.ACTRESS_TABLE_NAME, null, contentValues);
         contentValues.put("ActressName", "初始資料2");
+        contentValues.put("ActressCup", "d");
+        contentValues.put("ActressAge","15");
+        sqLiteDatabase.insert(DBOpenHelper.ACTRESS_TABLE_NAME, null, contentValues);
+        contentValues.put("ActressName", "dgfsdf");
+        contentValues.put("ActressCup", "e");
+        contentValues.put("ActressAge","16");
+        sqLiteDatabase.insert(DBOpenHelper.ACTRESS_TABLE_NAME, null, contentValues);
+        contentValues.put("ActressName", "初始資料2");
+        contentValues.put("ActressCup", "f");
+        contentValues.put("ActressAge","18");
         sqLiteDatabase.insert(DBOpenHelper.ACTRESS_TABLE_NAME, null, contentValues);
         contentValues.clear();
 
