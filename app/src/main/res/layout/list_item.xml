@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="@color/white"
+    android:background="@color/green"
     android:layout_marginTop="8dp"
     android:layout_marginBottom="8dp"
     android:elevation="4dp"
@@ -17,8 +17,8 @@
         android:padding="16dp">
 
         <ImageView android:id="@+id/ivPosterThumbnail"
-            android:layout_width="48dp"
-            android:layout_height="48dp"
+            android:layout_width="68dp"
+            android:layout_height="68dp"
             android:background="@color/gray"
             android:scaleType="centerCrop"
             android:contentDescription="TODO" />
@@ -26,9 +26,9 @@
         <TextView android:id="@+id/tvPosterName"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="16dp"
+            android:layout_marginLeft="38dp"
             android:text="Poster Name"
-            android:textSize="22sp"
+            android:textSize="28sp"
             android:textColor="@color/black"/>
     </LinearLayout>
 
@@ -39,9 +39,9 @@
         android:layout_marginRight="16dp"
         android:maxLines="5"
         android:ellipsize="end"
-        android:text="Content example"
+        android:text="Content"
         android:textColor="@color/black"
-        android:textSize="17sp"/>
+        android:textSize="26sp"/>
 
 
 
