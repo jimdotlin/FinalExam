@@ -13,7 +13,8 @@
         android:layout_gravity="center|top"
         android:layout_marginTop="50dp"
         android:text="@string/TextView"
-        android:textSize="22sp" />
+        android:textColor="@color/gray"
+        android:textSize="28sp" />
 
     <RadioGroup
         android:id="@+id/radioGroup"
@@ -30,6 +31,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="1"
+            android:textColor="@color/gray"
+            android:textSize="22sp"
             android:text="@string/yes" />
 
         <RadioButton
@@ -37,6 +40,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="1"
+            android:textColor="@color/gray"
+            android:textSize="22sp"
             android:text="@string/no" />
 
     </RadioGroup>
@@ -47,5 +52,6 @@
         android:layout_height="wrap_content"
         android:layout_gravity="bottom|center"
         android:layout_marginBottom="300dp"
+        style="@style/btn_primary"
         android:text="@string/confirm" />
 </FrameLayout>

@@ -24,7 +24,7 @@
         android:layout_marginTop="3dp"
         android:layout_weight="0"
         android:text="@string/TextView"
-        android:textColor="@color/black"
+        android:textColor="@color/gray"
         android:textSize="23sp" />
 
     <TextView
@@ -35,7 +35,7 @@
         android:layout_marginTop="3dp"
         android:layout_weight="0"
         android:text="@string/TextView"
-        android:textColor="@color/black"
+        android:textColor="@color/gray"
         android:textSize="23sp" />
 
     <TextView
@@ -46,7 +46,7 @@
         android:layout_marginTop="3dp"
         android:layout_weight="0"
         android:text="@string/TextView"
-        android:textColor="@color/black"
+        android:textColor="@color/gray"
         android:textSize="23sp" />
 
     <TextView
@@ -57,7 +57,7 @@
         android:layout_marginTop="3dp"
         android:layout_weight="0"
         android:text="@string/TextView"
-        android:textColor="@color/black"
+        android:textColor="@color/gray"
         android:textSize="23sp" />
 
     <android.support.design.widget.FloatingActionButton

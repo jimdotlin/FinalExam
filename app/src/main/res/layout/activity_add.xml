@@ -20,11 +20,13 @@
             android:layout_marginTop="50dp"
             android:layout_marginEnd="0dp"
             android:layout_marginBottom="8dp"
+            android:textColor="@color/gray"
+            android:textSize="23sp"
             android:text="@string/actressName" />
 
         <EditText
             android:id="@+id/editName"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="40dp"
             android:layout_marginEnd="65dp"
@@ -39,11 +41,13 @@
             android:layout_marginTop="8dp"
             android:layout_marginEnd="0dp"
             android:layout_marginBottom="8dp"
+            android:textColor="@color/gray"
+            android:textSize="23sp"
             android:text="@string/actressCup" />
 
         <EditText
             android:id="@+id/editCup"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="40dp"
             android:layout_marginEnd="65dp"
@@ -58,11 +62,13 @@
             android:layout_marginTop="8dp"
             android:layout_marginEnd="0dp"
             android:layout_marginBottom="8dp"
+            android:textColor="@color/gray"
+            android:textSize="23sp"
             android:text="@string/actressHeight" />
 
         <EditText
             android:id="@+id/editHeight"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="40dp"
             android:layout_marginEnd="65dp"
@@ -77,11 +83,13 @@
             android:layout_marginTop="8dp"
             android:layout_marginEnd="0dp"
             android:layout_marginBottom="8dp"
+            android:textColor="@color/gray"
+            android:textSize="23sp"
             android:text="@string/actressAge" />
 
         <EditText
             android:id="@+id/editAge"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="40dp"
             android:layout_marginEnd="65dp"
@@ -96,17 +104,18 @@
             android:layout_marginTop="8dp"
             android:layout_marginEnd="0dp"
             android:layout_marginBottom="8dp"
+            android:textColor="@color/gray"
+            android:textSize="23sp"
             android:text="@string/actressUrl" />
 
         <EditText
             android:id="@+id/editUrl"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="40dp"
             android:layout_marginEnd="65dp"
             android:ems="10"
-            android:inputType="textPersonName"
-            />
+            android:inputType="textPersonName" />
 
         <Button
             android:id="@+id/finishButton"
@@ -116,6 +125,7 @@
             android:layout_marginTop="8dp"
             android:layout_marginEnd="8dp"
             android:layout_marginBottom="0dp"
+            style="@style/btn_primary"
             android:text="@string/addButton" />
 
     </LinearLayout>
