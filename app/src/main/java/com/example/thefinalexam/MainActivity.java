@@ -127,13 +127,9 @@ public class MainActivity extends AppCompatActivity{
                 if(!ACTRESS_ITEMS.isEmpty()){
                     if(clickNum == 0){
                         clickNum++;
-                        sortStr = "ActressName";
-                        Toast.makeText(MainActivity.this, "以女優名排序", Toast.LENGTH_LONG).show();
-                    }else if(clickNum == 1){
-                        clickNum++;
                         sortStr = "ActressCup";
                         Toast.makeText(MainActivity.this, "以罩杯排序", Toast.LENGTH_LONG).show();
-                    }else if(clickNum == 2){
+                    }else if(clickNum == 1){
                         clickNum = 0;
                         sortStr = "ActressAge";
                         Toast.makeText(MainActivity.this, "以年齡排序", Toast.LENGTH_LONG).show();

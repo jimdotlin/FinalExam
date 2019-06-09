@@ -42,7 +42,7 @@ public class EditActivity extends AppCompatActivity {
                 Uri ActressUri = Uri.parse("content://com.example.thefinalexam.ActressProvider/actress");
                 ContentValues contentValues = new ContentValues();
                 contentValues.put("ActressName",editName.getText().toString());
-                contentValues.put("ActressCup",editCup.getText().toString());
+                contentValues.put("ActressCup",editCup.getText().toString().toUpperCase());
                 contentValues.put("ActressAge",editAge.getText().toString());
                 contentValues.put("ActressHeight",editHeight.getText().toString());
                 contentValues.put("PosterUrl",editUrl.getText().toString());

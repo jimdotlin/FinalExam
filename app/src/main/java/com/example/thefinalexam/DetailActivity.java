@@ -44,7 +44,7 @@ public class DetailActivity extends AppCompatActivity {
         TextView Name = findViewById(R.id.NameView);
         Name.setText("女優："+ActressName);
         TextView Cup = findViewById(R.id.CupView);
-        Cup.setText("三圍："+ActressCup);
+        Cup.setText("罩杯："+ActressCup);
         TextView Age = findViewById(R.id.AgeView);
         Age.setText("年齡："+ActressAge);
         TextView Height = findViewById(R.id.HeightView);

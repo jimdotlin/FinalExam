@@ -5,6 +5,8 @@ import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
+import java.util.Locale;
+
 public class DBOpenHelper extends SQLiteOpenHelper {
 
     private static final String DATA_BASE_NAME = "actress.db";
@@ -23,6 +25,7 @@ public class DBOpenHelper extends SQLiteOpenHelper {
     @Override
     public void onCreate(SQLiteDatabase db) {
          db.execSQL(CREATE_ACTRESS_TABLE);
+         db.setLocale(Locale.CHINESE);
     }
 
     @Override

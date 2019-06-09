@@ -36,7 +36,7 @@ public class AddActivity extends AppCompatActivity {
                 ContentValues contentValues = new ContentValues();
 //        getContentResolver().delete(ActressUri,null,null);//  -------清除表格-------
                 contentValues.put("ActressName",addName.getText().toString());
-                contentValues.put("ActressCup",addCup.getText().toString());
+                contentValues.put("ActressCup",addCup.getText().toString().toUpperCase());
                 contentValues.put("ActressHeight",addHeight.getText().toString());
                 contentValues.put("ActressAge",addAge.getText().toString());
                 contentValues.put("PosterUrl",addUrl.getText().toString());
