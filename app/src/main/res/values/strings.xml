@@ -22,6 +22,6 @@
     <string name="none_key" >None</string>
     <string name="music" translatable="false">music</string>
     <string name="music1" translatable="false">music1</string>
-    <string name="music2" translatable="false">music2</string>
-    <string name="none" translatable="false" >none</string>
+    <string name="music2" translatable="false"  >music2</string>
+    <string name="none"  translatable="false">none</string>
 </resources>

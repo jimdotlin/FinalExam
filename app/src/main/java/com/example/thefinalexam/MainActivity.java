@@ -40,6 +40,7 @@ public class MainActivity extends AppCompatActivity implements SharedPreferences
     private static final int MY_PERMISSION_RECORD_AUDIO_REQUEST_CODE = 1;
     public MediaPlayer mplayer = null;
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -127,12 +128,6 @@ public class MainActivity extends AppCompatActivity implements SharedPreferences
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
-        if (id == R.id.action_settings){
-            Intent startSettingsActivity = new Intent(this, SettingActivity.class);
-            startActivity(startSettingsActivity);
-            return true;
-        }
-
            switch (id){
             case R.id.action_settings :
                 Intent SettingIntent = new Intent(MainActivity.this, SettingActivity.class);
@@ -187,6 +182,7 @@ public class MainActivity extends AppCompatActivity implements SharedPreferences
                 requestPermissions(permissionsWeNeed, MY_PERMISSION_RECORD_AUDIO_REQUEST_CODE);
             }
         } else {
+            play();
         }
     }
     public void onRequestPermissionsResult(int requestCode,
@@ -222,7 +218,7 @@ public class MainActivity extends AppCompatActivity implements SharedPreferences
         String musicname = sharedPreferences.getString("music","music1");
 
 
-        Toast.makeText(this,String.valueOf(musicname.equals("music2")),Toast.LENGTH_SHORT).show();
+//        Toast.makeText(this,String.valueOf(musicname.equals("music2")),Toast.LENGTH_SHORT).show();
 
         if (musicname.equals("music1")){
             mplayer = MediaPlayer.create(getApplicationContext(),R.raw.tokyo);
@@ -261,6 +257,19 @@ public class MainActivity extends AppCompatActivity implements SharedPreferences
             }
 
             ActressCursor.close();
+        }
+    }
+    public void play(){
+        SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
+        String musicname = sharedPreferences.getString("music","music1");
+        if (musicname.equals("music1")){
+            mplayer = MediaPlayer.create(getApplicationContext(),R.raw.tokyo);
+            mplayer.start();
+        }else if (musicname.equals("music2")){
+            mplayer = MediaPlayer.create(getApplicationContext(),R.raw.pokemon);
+            mplayer.start();
+        }else if (musicname.equals("none")){
+            Toast.makeText(this,"NO MUSIC",Toast.LENGTH_SHORT).show();
         }
     }
 }
