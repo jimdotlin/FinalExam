@@ -15,4 +15,13 @@
     <string name="yes">是</string>
     <string name="no">否</string>
     <string name="confirm">確認</string>
+
+    <string name="music_key" >音樂</string>
+    <string name="music1_key" >Tokyo</string>
+    <string name="music2_key" >Pokemon</string>
+    <string name="none_key" >None</string>
+    <string name="music" translatable="false">music</string>
+    <string name="music1" translatable="false">music1</string>
+    <string name="music2" translatable="false">music2</string>
+    <string name="none" translatable="false" >none</string>
 </resources>

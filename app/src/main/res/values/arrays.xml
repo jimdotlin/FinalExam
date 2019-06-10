@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <array name="music_key" >
+        <item>@string/music1_key</item>
+        <item>@string/music2_key</item>
+        <item>@string/none_key</item>
+    </array>
+
+    <array name="music_value" >
+        <item>@string/music1</item>
+        <item>@string/music2</item>
+        <item>@string/none</item>
+    </array>
+</resources>

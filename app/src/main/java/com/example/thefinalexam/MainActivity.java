@@ -1,17 +1,26 @@
 package com.example.thefinalexam;
 
+import android.Manifest;
 import android.content.ContentValues;
 import android.content.Intent;
+import android.content.SharedPreferences;
+import android.content.pm.PackageManager;
 import android.database.Cursor;
+import android.media.MediaPlayer;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
+import android.support.annotation.NonNull;
 import android.support.design.widget.FloatingActionButton;
+import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.helper.ItemTouchHelper;
 import android.util.Log;
 import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Toast;
@@ -19,7 +28,7 @@ import android.widget.Toast;
 import java.util.ArrayList;
 
 
-public class MainActivity extends AppCompatActivity{
+public class MainActivity extends AppCompatActivity implements SharedPreferences.OnSharedPreferenceChangeListener{
 
     ArrayList<Actress> ACTRESS_ITEMS = new ArrayList<>();
 
@@ -28,6 +37,8 @@ public class MainActivity extends AppCompatActivity{
     private final String TAG = "MainActivity";
     private Adapter mAdapter;
     private RecyclerView mList;
+    private static final int MY_PERMISSION_RECORD_AUDIO_REQUEST_CODE = 1;
+    public MediaPlayer mplayer = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -100,19 +111,27 @@ public class MainActivity extends AppCompatActivity{
 
             }
         });
+        setupPermissions();
+        setupSharedPreferences();
     }
 
 
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.manu, menu);
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.manu, menu);
         return true;
     }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
+        if (id == R.id.action_settings){
+            Intent startSettingsActivity = new Intent(this, SettingActivity.class);
+            startActivity(startSettingsActivity);
+            return true;
+        }
 
            switch (id){
             case R.id.action_settings :
@@ -142,6 +161,83 @@ public class MainActivity extends AppCompatActivity{
                 }
         }
         return super.onOptionsItemSelected(item);
+    }
+    @Override
+    protected void onPause() {
+        super.onPause();
+        if (mplayer != null) {
+            mplayer.stop();
+        }
+    }
+    @Override
+    protected void onResume() {
+        super.onResume();
+
+        if (mplayer != null) {
+            mplayer.start();
+        }
+    }
+    private void setupPermissions() {
+
+        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.RECORD_AUDIO) != PackageManager.PERMISSION_GRANTED) {
+
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+
+                String[] permissionsWeNeed = new String[]{ Manifest.permission.RECORD_AUDIO };
+                requestPermissions(permissionsWeNeed, MY_PERMISSION_RECORD_AUDIO_REQUEST_CODE);
+            }
+        } else {
+        }
+    }
+    public void onRequestPermissionsResult(int requestCode,
+                                           @NonNull String permissions[], @NonNull int[] grantResults){
+        switch (requestCode){
+            case MY_PERMISSION_RECORD_AUDIO_REQUEST_CODE:{
+                if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED){
+
+                }else{
+                    Toast.makeText(this, "Permission for audio not granted. Visualizer can't run.", Toast.LENGTH_LONG).show();
+                    finish();
+                }
+            }
+        }
+    }
+    private void setupSharedPreferences(){
+        SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
+        String musicname = sharedPreferences.getString("music","music1");
+
+
+
+        if (musicname.equals("music1")){
+            mplayer = MediaPlayer.create(getApplicationContext(),R.raw.tokyo);
+        } else if (musicname.equals("music2")) {
+            mplayer = MediaPlayer.create(getApplicationContext(),R.raw.pokemon);
+        }else if (musicname.equals("none")){
+            Toast.makeText(this,"NO MUSIC",Toast.LENGTH_SHORT).show();
+        }
+        sharedPreferences.registerOnSharedPreferenceChangeListener(this);
+    }
+    @Override
+    public void onSharedPreferenceChanged(SharedPreferences sharedPreferences, String key){
+        String musicname = sharedPreferences.getString("music","music1");
+
+
+        Toast.makeText(this,String.valueOf(musicname.equals("music2")),Toast.LENGTH_SHORT).show();
+
+        if (musicname.equals("music1")){
+            mplayer = MediaPlayer.create(getApplicationContext(),R.raw.tokyo);
+        }else if (musicname.equals("music2")){
+            mplayer = MediaPlayer.create(getApplicationContext(),R.raw.pokemon);
+        }else if (musicname.equals("none")){
+            Toast.makeText(this,"NO MUSIC",Toast.LENGTH_SHORT).show();
+        }
+
+    }
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        PreferenceManager.getDefaultSharedPreferences(this)
+                .unregisterOnSharedPreferenceChangeListener(this);
     }
 
     public void getData(String sortStr){
