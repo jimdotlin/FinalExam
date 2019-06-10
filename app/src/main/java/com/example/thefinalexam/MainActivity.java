@@ -38,7 +38,7 @@ public class MainActivity extends AppCompatActivity implements SharedPreferences
     private Adapter mAdapter;
     private RecyclerView mList;
     private static final int MY_PERMISSION_RECORD_AUDIO_REQUEST_CODE = 1;
-    public MediaPlayer mplayer = null;
+    private MediaPlayer mplayer = null;
 
 
     @Override
@@ -162,14 +162,23 @@ public class MainActivity extends AppCompatActivity implements SharedPreferences
         super.onPause();
         if (mplayer != null) {
             mplayer.stop();
+            mplayer.release();
+            mplayer = null;
         }
     }
     @Override
     protected void onResume() {
         super.onResume();
 
+        int i = MainActivity.class.hashCode();
+        Log.e(TAG,"hashcode : "+i);
         if (mplayer != null) {
-            mplayer.start();
+                mplayer.start();
+        }else if (mplayer == null){
+            setupSharedPreferences();
+            if (mplayer != null){
+                mplayer.start();
+            }
         }
     }
     private void setupPermissions() {
@@ -210,6 +219,7 @@ public class MainActivity extends AppCompatActivity implements SharedPreferences
             mplayer = MediaPlayer.create(getApplicationContext(),R.raw.pokemon);
         }else if (musicname.equals("none")){
             Toast.makeText(this,"NO MUSIC",Toast.LENGTH_SHORT).show();
+            mplayer = null;
         }
         sharedPreferences.registerOnSharedPreferenceChangeListener(this);
     }
@@ -262,6 +272,7 @@ public class MainActivity extends AppCompatActivity implements SharedPreferences
     public void play(){
         SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
         String musicname = sharedPreferences.getString("music","music1");
+        if (mplayer != null){
         if (musicname.equals("music1")){
             mplayer = MediaPlayer.create(getApplicationContext(),R.raw.tokyo);
             mplayer.start();
@@ -271,5 +282,6 @@ public class MainActivity extends AppCompatActivity implements SharedPreferences
         }else if (musicname.equals("none")){
             Toast.makeText(this,"NO MUSIC",Toast.LENGTH_SHORT).show();
         }
+    }
     }
 }
