@@ -1,16 +1,23 @@
 package com.example.thefinalexam;
 
+import android.app.TimePickerDialog;
+import android.content.Intent;
 import android.database.Cursor;
 import android.net.Uri;
 import android.os.Bundle;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.RadioButton;
 import android.widget.TextView;
+import android.widget.TimePicker;
 import android.widget.Toast;
 
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.GregorianCalendar;
+import java.util.TimeZone;
 
 public class QuestionActivity extends AppCompatActivity {
 
@@ -22,7 +29,7 @@ public class QuestionActivity extends AppCompatActivity {
     private RadioButton noButton;
     private String questionName;
     private String questionCup;
-
+    private TextView dateText;
 
 
     @Override
@@ -70,6 +77,32 @@ public class QuestionActivity extends AppCompatActivity {
                     }
                 }
             });
+        FloatingActionButton fab = findViewById(R.id.floatingActionButton);
+        fab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                final Calendar c = Calendar.getInstance();
+                int hour = c.get(Calendar.HOUR_OF_DAY);
+                int minute = c.get(Calendar.MINUTE);
+
+                new TimePickerDialog(QuestionActivity.this, new TimePickerDialog.OnTimeSetListener(){
+
+                    @Override
+                    public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
+//                        Calendar cal = new GregorianCalendar(TimeZone.getTimeZone("GMT+8:00"));
+                        Calendar cal = Calendar.getInstance();
+                        cal.set(Calendar.HOUR_OF_DAY, hourOfDay);
+                        cal.set(Calendar.MINUTE, minute);
+                        cal.set(Calendar.SECOND,0);
+                        MainActivity.add_alarm(QuestionActivity.this, cal);
+                        Toast.makeText(QuestionActivity.this, "提醒已設定在 "+String.valueOf(cal.get(Calendar.HOUR_OF_DAY)) + ":" + cal.get(Calendar.MINUTE), Toast.LENGTH_LONG).show();
+                        Intent intent = new Intent(QuestionActivity.this, MainActivity.class);
+                        startActivity(intent);
+                    }
+                }, hour, minute, true).show();
+            }
+        });
     }
 
         public int getRandom () {

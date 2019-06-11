@@ -5,6 +5,12 @@
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.MODIFY_AUDIO_SETTINGS" />
     <uses-permission android:name="android.permission.RECORD_AUDIO" />
+    <uses-permission android:name="android.permission.VIBRATE" />
+    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
+
+    <permission
+        android:name="android.permission.STATUS_BAR_SERVICE"
+        android:protectionLevel="signature" />
 
     <application
         android:allowBackup="true"
@@ -13,25 +19,47 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".EditActivity"
-            android:screenOrientation="portrait"></activity>
-        <activity android:name=".DetailActivity"
-            android:screenOrientation="portrait"></activity>
-        <activity android:name=".AddActivity"
-            android:screenOrientation="portrait"></activity>
-        <activity android:name=".QuestionActivity"
-            android:screenOrientation="portrait"></activity>
+
+        <receiver
+            android:name=".BootUpReceiver"
+            android:enabled="true"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.BOOT_COMPLETED" />
+            </intent-filter>
+        </receiver>
+        <receiver
+            android:name=".AlarmReceiver"
+            android:enabled="true"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="activity_app" />
+            </intent-filter>
+        </receiver>
+
+        <activity
+            android:name=".EditActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".DetailActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".AddActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".QuestionActivity"
+            android:screenOrientation="portrait" />
         <activity
             android:name=".SettingActivity"
             android:label="@string/action_settings"
-
-            android:screenOrientation="portrait"></activity>
-        <activity android:name=".MainActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".MainActivity"
             android:launchMode="singleTop"
             android:screenOrientation="portrait">
-
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>

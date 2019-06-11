@@ -16,12 +16,17 @@
     <string name="no">否</string>
     <string name="confirm">確認</string>
 
-    <string name="music_key" >音樂</string>
-    <string name="music1_key" >Tokyo</string>
-    <string name="music2_key" >Pokemon</string>
-    <string name="none_key" >None</string>
+    <string name="music_key">音樂</string>
+    <string name="music1_key">Tokyo</string>
+    <string name="music2_key">Pokemon</string>
+    <string name="none_key">None</string>
     <string name="music" translatable="false">music</string>
     <string name="music1" translatable="false">music1</string>
-    <string name="music2" translatable="false"  >music2</string>
-    <string name="none"  translatable="false">none</string>
+    <string name="music2" translatable="false">music2</string>
+    <string name="none" translatable="false">none</string>
+
+    <string name="main_notification_channel_name">Primary</string>
+    <string name="notification_title">考考你的記憶力</string>
+    <string name="notification_body">每天記得要回來考試，看看自己還記不記得女優的資料吧!</string>
+
 </resources>

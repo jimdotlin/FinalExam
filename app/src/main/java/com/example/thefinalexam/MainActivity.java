@@ -1,7 +1,12 @@
 package com.example.thefinalexam;
 
 import android.Manifest;
+import android.app.AlarmManager;
+import android.app.Notification;
+import android.app.NotificationManager;
+import android.app.PendingIntent;
 import android.content.ContentValues;
+import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
@@ -14,6 +19,7 @@ import android.preference.PreferenceManager;
 import android.support.annotation.NonNull;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.ActivityCompat;
+import android.support.v4.app.NotificationCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -23,9 +29,13 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.GregorianCalendar;
+import java.util.TimeZone;
 
 
 public class MainActivity extends AppCompatActivity implements SharedPreferences.OnSharedPreferenceChangeListener{
@@ -34,7 +44,7 @@ public class MainActivity extends AppCompatActivity implements SharedPreferences
 
     int clickNum = 0;
     String sortStr = "";
-    private final String TAG = "MainActivity";
+    private static String TAG = "MainActivity";
     private Adapter mAdapter;
     private RecyclerView mList;
     private static final int MY_PERMISSION_RECORD_AUDIO_REQUEST_CODE = 1;
@@ -45,6 +55,9 @@ public class MainActivity extends AppCompatActivity implements SharedPreferences
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+
+
 //----------------get database data------------------------------------------------------------
         getData(sortStr);
 
@@ -170,8 +183,8 @@ public class MainActivity extends AppCompatActivity implements SharedPreferences
     protected void onResume() {
         super.onResume();
 
-        int i = MainActivity.class.hashCode();
-        Log.e(TAG,"hashcode : "+i);
+//        int i = MainActivity.class.hashCode();
+//        Log.e(TAG,"hashcode : "+i);
         if (mplayer != null) {
                 mplayer.start();
         }else if (mplayer == null){
@@ -211,8 +224,6 @@ public class MainActivity extends AppCompatActivity implements SharedPreferences
         SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
         String musicname = sharedPreferences.getString("music","music1");
 
-
-
         if (musicname.equals("music1")){
             mplayer = MediaPlayer.create(getApplicationContext(),R.raw.tokyo);
         } else if (musicname.equals("music2")) {
@@ -248,7 +259,7 @@ public class MainActivity extends AppCompatActivity implements SharedPreferences
 
     public void getData(String sortStr){
         Uri ActressUri = Uri.parse("content://com.example.thefinalexam.ActressProvider/actress");
-        ContentValues contentValues = new ContentValues();
+//        ContentValues contentValues = new ContentValues();
 //        getContentResolver().delete(ActressUri,null,null);//  ----清除表格----
 //        contentValues.put("ActressName", "三上優雅");
 //        contentValues.put("ActressCup","z");
@@ -283,5 +294,22 @@ public class MainActivity extends AppCompatActivity implements SharedPreferences
             Toast.makeText(this,"NO MUSIC",Toast.LENGTH_SHORT).show();
         }
     }
+    }
+
+    public static void add_alarm(Context context, Calendar cal) {
+        Log.e(TAG, "alarm add time: " + String.valueOf(cal.get(Calendar.MONTH)) + "." + String.valueOf(cal.get(Calendar.DATE)) + " " + String.valueOf(cal.get(Calendar.HOUR_OF_DAY)) + ":" + cal.get(Calendar.MINUTE) + ":" + cal.get(Calendar.SECOND));
+
+        Intent intent = new Intent(context, AlarmReceiver.class);
+        intent.addCategory("ID." + String.valueOf(cal.get(Calendar.MONTH)) + "." + String.valueOf(cal.get(Calendar.DATE)) + "-" + String.valueOf((cal.get(Calendar.HOUR_OF_DAY) )) + "." + String.valueOf(cal.get(Calendar.MINUTE)) + "." + String.valueOf(cal.get(Calendar.SECOND)));
+        String AlarmTimeTag = "Alarmtime " + String.valueOf(cal.get(Calendar.HOUR_OF_DAY)) + ":" + String.valueOf(cal.get(Calendar.MINUTE)) + ":" + String.valueOf(cal.get(Calendar.SECOND));
+
+        intent.putExtra("title", "activity_app");
+        intent.putExtra("time", AlarmTimeTag);
+
+        PendingIntent pi = PendingIntent.getBroadcast(context, 1, intent, PendingIntent.FLAG_UPDATE_CURRENT);
+
+        AlarmManager am = (AlarmManager) context.getSystemService(context.ALARM_SERVICE);
+        am.set(AlarmManager.RTC_WAKEUP, cal.getTimeInMillis(), pi);
+
     }
 }

@@ -54,4 +54,13 @@
         android:layout_marginBottom="300dp"
         style="@style/btn_primary"
         android:text="@string/confirm" />
+
+    <android.support.design.widget.FloatingActionButton
+        android:id="@+id/floatingActionButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom|end"
+        android:layout_margin="@dimen/fab_margin"
+        android:tint="@android:color/white"
+        app:srcCompat="@drawable/ic_alarm_black_24dp" />
 </FrameLayout>
