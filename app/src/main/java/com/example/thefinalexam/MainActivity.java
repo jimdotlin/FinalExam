@@ -49,6 +49,7 @@ public class MainActivity extends AppCompatActivity implements SharedPreferences
     private RecyclerView mList;
     private static final int MY_PERMISSION_RECORD_AUDIO_REQUEST_CODE = 1;
     private MediaPlayer mplayer = null;
+    private boolean iscreate = false;
 
 
     @Override
@@ -58,7 +59,7 @@ public class MainActivity extends AppCompatActivity implements SharedPreferences
 
 
 
-//----------------get database data------------------------------------------------------------
+        //----------------get database data------------------------------------------------------------
         getData(sortStr);
 
         mList = (RecyclerView) findViewById(R.id.recyclerViewTasks);
@@ -111,7 +112,11 @@ public class MainActivity extends AppCompatActivity implements SharedPreferences
             }
         }).attachToRecyclerView(mList);
 
+
+
         //---------------------------------Click to Question view----------------------------------------------
+
+
         FloatingActionButton fab = findViewById(R.id.floatingActionButton);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -182,8 +187,7 @@ public class MainActivity extends AppCompatActivity implements SharedPreferences
     @Override
     protected void onResume() {
         super.onResume();
-
-//        int i = MainActivity.class.hashCode();
+//        int i = MainActivity.class.hashCode();----------------------------------------------------------------------------------------------------
 //        Log.e(TAG,"hashcode : "+i);
         if (mplayer != null) {
                 mplayer.start();
@@ -259,13 +263,7 @@ public class MainActivity extends AppCompatActivity implements SharedPreferences
 
     public void getData(String sortStr){
         Uri ActressUri = Uri.parse("content://com.example.thefinalexam.ActressProvider/actress");
-//        ContentValues contentValues = new ContentValues();
-//        getContentResolver().delete(ActressUri,null,null);//  ----清除表格----
-//        contentValues.put("ActressName", "三上優雅");
-//        contentValues.put("ActressCup","z");
-//        contentValues.put("ActressAge","20");
-//        contentValues.put("PosterUrl","https://i.imgur.com/gn1XeZ2.jpg");
-//        getContentResolver().insert(ActressUri, contentValues);
+
         Cursor ActressCursor = getContentResolver().query(ActressUri, new String[]{"_id", "ActressName","ActressCup","ActressAge","ActressHeight","PosterUrl"}, null, null, sortStr);
         if (ActressCursor != null) {
             while (ActressCursor.moveToNext()) {
@@ -278,8 +276,79 @@ public class MainActivity extends AppCompatActivity implements SharedPreferences
             }
 
             ActressCursor.close();
+            if(ACTRESS_ITEMS.isEmpty()){
+                initCreate();
+            }
         }
     }
+
+    public void initCreate(){
+        Uri ActressUri = Uri.parse("content://com.example.thefinalexam.ActressProvider/actress");
+        ContentValues contentValues = new ContentValues();
+//        getContentResolver().delete(ActressUri,null,null);//  ----清除表格----
+        contentValues.put("ActressName", "三上悠亞");
+        contentValues.put("ActressCup","F");
+        contentValues.put("ActressAge","25");
+        contentValues.put("ActressHeight","159");
+        contentValues.put("PosterUrl","https://i.imgur.com/gn1XeZ2.jpg");
+        getContentResolver().insert(ActressUri, contentValues);
+        contentValues.put("ActressName", "波多野結衣");
+        contentValues.put("ActressCup","D");
+        contentValues.put("ActressAge","31");
+        contentValues.put("ActressHeight","163");
+        contentValues.put("PosterUrl","https://i.imgur.com/Hhu8nR6.png");
+        getContentResolver().insert(ActressUri, contentValues);
+        contentValues.put("ActressName", "上原亞衣");
+        contentValues.put("ActressCup","E");
+        contentValues.put("ActressAge","26");
+        contentValues.put("ActressHeight","155");
+        contentValues.put("PosterUrl","https://i.imgur.com/R7oIfrr.jpg");
+        getContentResolver().insert(ActressUri, contentValues);
+        contentValues.put("ActressName", "沖田杏梨");
+        contentValues.put("ActressCup","L");
+        contentValues.put("ActressAge","32");
+        contentValues.put("ActressHeight","168");
+        contentValues.put("PosterUrl","https://i.imgur.com/StRaWLI.jpg");
+        getContentResolver().insert(ActressUri, contentValues);
+        contentValues.put("ActressName", "明日花綺羅");
+        contentValues.put("ActressCup","G");
+        contentValues.put("ActressAge","30");
+        contentValues.put("ActressHeight","162");
+        contentValues.put("PosterUrl","https://i.imgur.com/xexrwdH.jpg");
+        getContentResolver().insert(ActressUri, contentValues);
+        contentValues.put("ActressName", "蒼井空");
+        contentValues.put("ActressCup","G");
+        contentValues.put("ActressAge","35");
+        contentValues.put("ActressHeight","155");
+        contentValues.put("PosterUrl","https://i.imgur.com/l8sb8zf.jpg");
+        getContentResolver().insert(ActressUri, contentValues);
+        contentValues.put("ActressName", "吉澤明步");
+        contentValues.put("ActressCup","E");
+        contentValues.put("ActressAge","35");
+        contentValues.put("ActressHeight","161");
+        contentValues.put("PosterUrl","https://i.imgur.com/qa1di9M.jpg");
+        getContentResolver().insert(ActressUri, contentValues);
+        contentValues.put("ActressName", "橋本有菜");
+        contentValues.put("ActressCup","C");
+        contentValues.put("ActressAge","22");
+        contentValues.put("ActressHeight","166");
+        contentValues.put("PosterUrl","https://i.imgur.com/u9iyuuV.jpg");
+        getContentResolver().insert(ActressUri, contentValues);
+        contentValues.put("ActressName", "河北彩花");
+        contentValues.put("ActressCup","E");
+        contentValues.put("ActressAge","19");
+        contentValues.put("ActressHeight","169");
+        contentValues.put("PosterUrl","https://i.imgur.com/VkfvRfD.jpg");
+        getContentResolver().insert(ActressUri, contentValues);
+        contentValues.put("ActressName", "桃乃木香奈");
+        contentValues.put("ActressCup","F");
+        contentValues.put("ActressAge","22");
+        contentValues.put("ActressHeight","153");
+        contentValues.put("PosterUrl","https://i.imgur.com/dZEHu5W.png");
+        getContentResolver().insert(ActressUri, contentValues);
+
+    }
+
     public void play(){
         SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
         String musicname = sharedPreferences.getString("music","music1");
