@@ -11,7 +11,6 @@ public class DBOpenHelper extends SQLiteOpenHelper {
 
     private static final String DATA_BASE_NAME = "actress.db";
     private static final int DATE_BASE_VERSION = 1;
-//    private static SQLiteDatabase database;
     public static final String ACTRESS_TABLE_NAME = "actress";
 
     private final String CREATE_ACTRESS_TABLE = "create table " + ACTRESS_TABLE_NAME
