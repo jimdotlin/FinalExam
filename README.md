@@ -1,7 +1,7 @@
 # MyDream
 ## 主畫面
 ### 女優的詳細資料
-<img alt="main" src="../images/main.png" height="400" width="200" />
+<img alt="main" src="images/main.png" height="400" width="200" />
 ***
 ## 新增頁
 ### 新增女優
