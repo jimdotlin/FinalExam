@@ -1,7 +1,7 @@
 # MyDream
 ## 主畫面
 ### 女優的詳細資料
-![image](https://github.com/jimlinJC/MyDream/tree/master/images/main.png)
+![ScreenShot](https://github.com/jimlinJC/MyDream/tree/master/images/main.png)
 ***
 ## 新增頁
 ### 新增女優
