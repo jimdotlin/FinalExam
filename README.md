@@ -1,32 +1,32 @@
 # MyDream
 ## 主畫面
 ### 女優的詳細資料
-<img alt="main" src="images/main.png" height="400" width="200" />
-***
+<img alt="main" src="images/main.png"  width="200" /><br/>
+* * *
 ## 新增頁
 ### 新增女優
-![image](https://github.com/jimlinJC/MyDream/tree/master/images/add.png)
-***
+<img alt="main" src="images/add.png"  width="200" /><br/>
+* * *
 ## 詳細資料
 ### 點擊清單可進入詳細資料頁面
-![imgae](https://github.com/jimlinJC/MyDream/tree/master/images/detail.png)
+<img alt="main" src="images/detail.png"  width="200" /><br/>
 ***
 ## 修改資料
 ### 點擊右下角按鈕可對資料進行修改
-![image](https://github.com/jimlinJC/MyDream/tree/master/images/update.png)
+<img alt="main" src="images/update.png"  width="200" /><br/>
 ***
 ## 刪除資料
 ### 將清單上資料往右滑可刪除該筆資料
-![image](https://github.com/jimlinJC/MyDream/tree/master/images/swipe.png)
+<img alt="main" src="images/swipe.png"  width="200" /><br/>
 ***
 ## 排序
 ### 可改變清單排序方式
-![image](https://github.com/jimlinJC/MyDream/tree/master/images/sortCup.png)
-![image](https://github.com/jimlinJC/MyDream/tree/master/images/sortAge.png)
+<img alt="main" src="images/sortCup.png"  width="200" /><br/>
+<img alt="main" src="images/sortAge.png"  width="200" /><br/>
 ***
 ## 是非題
 ### 考考你對女優熟不熟
-![image](https://github.com/jimlinJC/MyDream/tree/master/images/YesOrNo,png)
+<img alt="main" src="images/YesOrNo.png"  width="200" /><br/>
 
 ### 設定鬧鐘讓你定期回來做測驗
-![image](https://github.com/jimlinJC/MyDream/tree/master/images/alarm.png)
+<img alt="main" src="images/alarm.png"  width="200" /><br/>
