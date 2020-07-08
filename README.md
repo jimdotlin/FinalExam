@@ -24,7 +24,7 @@
 <div>
 <img alt="main" src="images/sortCup.png"  width="200" />
 <img alt="main" src="images/sortAge.png"  width="200" /><br/>
- </div>
+ </div><br/>
 ***
 ## 是非題
 #### 考考你對女優熟不熟
